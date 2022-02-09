@@ -17,10 +17,15 @@
 }
 
 #game-over h3{
-    font-size: 2.5rem;
+    font-size: 2.3rem;
     margin: 0.5rem 0;
     
 
+}
+
+#winner-name{
+    font-size: 2.8rem;
+    color: chartreuse;
 }
 
 #active-player-name{

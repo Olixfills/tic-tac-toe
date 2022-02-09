@@ -2,7 +2,8 @@
 function resetGame() {
     activePlayer = 0;
     currentRound =  1;
-    gameOverElement.firstElementChild.innerHTML = '<h3>You won <span id="winner-name">Player Name</span></h3>';
+    gameOverElement.firstElementChild.innerHTML =
+    'You won, <span id="winner-name">PLAYER NAME</span>!'
     gameOverElement.style.display = 'none';
     gameIsOver = false;
 
@@ -136,7 +137,7 @@ function endGame(winnerId) {
 
     if (winnerId > 0) {
         const winnerName = players[winnerId - 1].name;
-        gameOverElement.firstElementChild.firstElementChild.textContent = `${winnerName} wins`;
+        gameOverElement.firstElementChild.firstElementChild.textContent = winnerName;
 
     } else {
         gameOverElement.firstElementChild.textContent = 'It\'s a Draw!!';

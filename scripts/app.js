@@ -29,7 +29,6 @@ const requestPlayerName = document.getElementById('player-name-error');
 const gameFieldElements = document.querySelectorAll('#game-board li');
 const activePlayerName = document.getElementById('active-player-name');
 const gameOverElement = document.getElementById('game-over');
-const winnerNameCongrats = document.getElementById('winner-name');
 
 
 //Buttons
