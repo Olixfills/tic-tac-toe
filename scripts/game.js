@@ -136,7 +136,7 @@ function endGame(winnerId) {
 
     if (winnerId > 0) {
         const winnerName = players[winnerId - 1].name;
-        gameOverElement.firstElementChild.firstElementChild.textContent = winnerName;
+        gameOverElement.firstElementChild.firstElementChild.textContent = `${winnerName} wins`;
 
     } else {
         gameOverElement.firstElementChild.textContent = 'It\'s a Draw!!';
