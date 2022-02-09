@@ -1,3 +1,25 @@
+
+function resetGame() {
+    activePlayer = 0;
+    currentRound =  1;
+    gameOverElement.firstElementChild.innerHTML = '<h3>You won <span id="winner-name">Player Name</span></h3>';
+    gameOverElement.style.display = 'none';
+    gameIsOver = false;
+
+
+    let gameBoardIndex = 0;
+    for (let i = 0; i < 3; i++){
+        for (let j = 0; j < 3; j++){
+            gameData[i][j] = 0;
+            gameFieldElements[gameBoardIndex].textContent = '';
+            gameFieldElements[gameBoardIndex].classList.remove('disabled');
+            gameBoardIndex++;
+
+        }
+    }
+
+}
+
 function startNewGame() {
     if (players[0].name === '' || players[1].name === '') {
         backdrop.style.display = 'block';
@@ -5,6 +27,8 @@ function startNewGame() {
 
         return;
     }
+
+    resetGame();
 
     activePlayerName.textContent = players[activePlayer].name;
 
@@ -26,7 +50,9 @@ function switchPlayer() {
 
 function selectGameField(event) {
     const pickedField = event.target;
-
+    if (gameIsOver){
+        return;
+    }
     if (pickedField.textContent !== '') {
         alert('Please select an empty field');
         return;
@@ -44,8 +70,16 @@ function selectGameField(event) {
 
     const winnerId = checkForGameOver();
 
+    if (winnerId !== 0) {
+        endGame(winnerId);
+
+    }
+    
     currentRound++;
     switchPlayer();
+
+
+
 
 }
 
@@ -63,11 +97,13 @@ function checkForGameOver() {
 
     //Check for equality in cols
     for (let i = 0; i < 3; i++) {
-        if (gameData[i][0] > 0 &&
-            gameData[i][0] === gameData[i][1] &&
-            gameData[i][1] === gameData[i][2]) {
-            return gameData[i][0];
-        }
+        if (
+            gameData[0][i] > 0 &&
+            gameData[0][i] === gameData[1][i] &&
+            gameData[0][i] === gameData[2][i]
+          ) {
+            return gameData[0][i];
+          }
     }
 
     //check for equality in diagonal top left to bottom right
@@ -87,7 +123,7 @@ function checkForGameOver() {
     }
 
     if (currentRound === 9) {
-        retrn - 1;
+        return -1;
     }
 
 
@@ -95,10 +131,16 @@ function checkForGameOver() {
 }
 
 function endGame(winnerId) {
-
-    const winnerName = players[winnerId - 1].name;
+    gameIsOver = true;
     gameOverElement.style.display = 'block';
 
-    gameOverElement.firstElementChild.firstElementChild.textContent = winnerName;
+    if (winnerId > 0) {
+        const winnerName = players[winnerId - 1].name;
+        gameOverElement.firstElementChild.firstElementChild.textContent = winnerName;
+
+    } else {
+        gameOverElement.firstElementChild.textContent = 'It\'s a Draw!!';
+
+    }
 
 }
